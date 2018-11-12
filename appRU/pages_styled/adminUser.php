@@ -7,7 +7,13 @@ require_once '../classes/userClass.php';
 
 //get id of clicked item from url
 
-$user = $_GET['user'];
+//$user = $_GET['user'];
+
+session_start();
+$user = $_SESSION['user_id'];
+
+
+require_once '../parts/header.php';
 
 $obj = new userClass($conn);
 
@@ -16,17 +22,15 @@ if (isset($_POST['update'])) {
 
     $first_name = htmlspecialchars($_POST['first_name']);
     $last_name = htmlspecialchars($_POST['last_name']);
-    $gender = htmlspecialchars($_POST['gender']);
     $birthdate = htmlspecialchars($_POST['birthdate']);
     $location = htmlspecialchars($_POST['location']);
     $email = htmlspecialchars($_POST['email']);
     $phone = htmlspecialchars($_POST['phone']);
     $about = htmlspecialchars($_POST['about']);
-    $password = htmlspecialchars($_POST['password']);
 
 
     //update video
-    $obj->update($user, $first_name, $last_name, $gender, $birthdate, $location, $email, $phone, $about, $password);
+    $obj->update($user, $first_name, $last_name, $birthdate, $location, $email, $phone, $about);
     echo "<script>location.href = 'user.php?user=" . $user . "';</script>";
 }
 
@@ -46,7 +50,7 @@ $obj = $result->fetch_object();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Settings</title>
+    <title>Настройки</title>
     <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styleApp.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -96,41 +100,36 @@ $obj = $result->fetch_object();
     <div class="header">
 
         <a href='user.php?user=<?php echo $user;?>'><i class="fas fa-arrow-left"></i></a>
-        <h3>Settings</h3>
+        <h3>Настройки</h3>
     </div>
 
     <div class="set">
-        <h4>Your profile</h4>
+        <h4>Ваш профиль</h4>
     </div>
     <form method="post">
         <ul class="settingsContent">
             <li>
                 <div class="subContent">
-                    <span class="bold">First name</span>
+                    <span class="bold">Имя</span>
                     <input name='first_name' value="<?php echo $obj->first_name; ?>" type="text" placeholder="—">
                 </div>
             </li>
             <li>
                 <div class="subContent">
-                    <span class="bold">Last name</span>
+                    <span class="bold">Фамилия</span>
                     <input name='last_name' value="<?php echo $obj->last_name; ?>" type="text" placeholder="—">
                 </div>
             </li>
+
             <li>
                 <div class="subContent">
-                    <span class="bold">Gender</span>
-                    <input name='gender' value="<?php echo $obj->gender; ?>" type="text" placeholder="—">
-                </div>
-            </li>
-            <li>
-                <div class="subContent">
-                    <span class="bold">Birthdate</span>
+                    <span class="bold">Дата рождения</span>
                     <input name='birthdate' value="<?php echo $obj->birthdate; ?>" type="text" placeholder="—">
                 </div>
             </li>
             <li>
                 <div class="subContent">
-                    <span class="bold">Location</span>
+                    <span class="bold">Адрес</span>
                     <input name='location' value="<?php echo $obj->location; ?>" type="text" placeholder="—">
                 </div>
             </li>
@@ -142,19 +141,14 @@ $obj = $result->fetch_object();
             </li>
             <li>
                 <div class="subContent">
-                    <span class="bold">Phone</span>
+                    <span class="bold">Телефон</span>
                     <input name='phone' value="<?php echo $obj->phone; ?>" type="text" placeholder="—">
                 </div>
             </li>
-            <li>
-                <div class="subContent">
-                    <span class="bold">Password</span>
-                    <input id='what' type="password" value="123456">
-                </div>
-            </li>
+
         </ul>
         <input name="update" type="submit" value="Done">
-        <a href="user.php?user=<?php echo $user; ?>">Cancel</a>
+        <a href="user.php?user=<?php echo $user; ?>">Отменить</a>
     </form>
     <?php include_once '../parts/footer.php' ?>
 </div>

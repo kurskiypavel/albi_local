@@ -134,7 +134,7 @@
                 </div>
 
                 <div class="buttons">
-                    <button class="fb">Continue with Facebook</button>
+                    <!-- <button class="fb">Continue with Facebook</button> -->
 
                     <button class="phone">Sign in with your phone</button>
                 </div>

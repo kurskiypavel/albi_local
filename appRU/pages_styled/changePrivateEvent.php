@@ -7,7 +7,13 @@ require_once '../classes/eventClass.php';
 
 //get id of clicked item from url
 $id = $_GET['id'];
-$user = $_GET['user'];
+//$user = $_GET['user'];
+session_start();
+$user = $_SESSION['user_id'];
+
+
+require_once '../parts/header.php';
+
 $page = $_GET['page'];
 
 $obj = new eventClass($conn);
@@ -62,7 +68,7 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Change booking</title>
+    <title>Изменение записи</title>
     <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styleApp.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -109,17 +115,17 @@ if ($_POST) {
     <div class="changePrivateEventPage">
         <div class="header">
             <a href='events.php?user=<?php echo $user;?>'><i class="fas fa-arrow-left"></i></a>
-            <h3>Change booking</h3>
+            <h3>Изменение записи</h3>
         </div>
 
 
         <form class='form' method="post">
-            <p class="label">Choose date</p><input class="gray" name='date' type="date" value="<?php echo $objEvent->date; ?>">
-            <p class="label">Choose time</p><input class="gray" name='time' type="time"  value="<?php echo $objEvent->time; ?>">
-            <p class="label">Comment</p><textarea name='comment' type="text" value=""><?php echo $objEvent->comment; ?></textarea>
+            <p class="label">Дата</p><input class="gray" name='date' type="date" value="<?php echo $objEvent->date; ?>">
+            <p class="label">Время</p><input class="gray" name='time' type="time"  value="<?php echo $objEvent->time; ?>">
+            <p class="label">Комментарий</p><textarea name='comment' type="text" value=""><?php echo $objEvent->comment; ?></textarea>
 
             <div class="repeatableDiv">
-                <p class="repeatableLabel">Make repeatable</p>
+                <p class="repeatableLabel">Повторные занятия</p>
                 <div class="repeatableCheckbox">
                     <input type='checkbox' class='ios8-switch' name="repeatable" id='checkbox-1'>
                     <!-- get to DB by checked property -->
@@ -127,8 +133,8 @@ if ($_POST) {
                 </div>
             </div>
 
-            <input class="button" name="changePrivateEvent" type="submit" value="Change">
-            <input class="cancel" name="deletePrivateEvent" type="submit" value="Cancel booking">
+            <input class="button" name="changePrivateEvent" type="submit" value="Изменить">
+            <input class="cancel" name="deletePrivateEvent" type="submit" value="Отменить занятие">
 
         </form>
         <?php include_once '../parts/footer.php'?>

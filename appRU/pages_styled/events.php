@@ -5,7 +5,12 @@ require_once '../config.php';
 require_once '../classes/eventClass.php';
 
 
-$user = $_GET['user'];
+//$user = $_GET['user'];
+session_start();
+$user = $_SESSION['user_id'];
+
+
+require_once '../parts/header.php';
 
 
 
@@ -22,7 +27,7 @@ $classEvent = new eventClass($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Events</title>
+    <title>Занятия</title>
     <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styleApp.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -67,10 +72,10 @@ $classEvent = new eventClass($conn);
 
 <body>
     <div class="header eventsPage">
-        <h3>Events</h3>
+        <h3>Занятия</h3>
         <ul class='eventLists'>
-            <li id='groupEvents' class="active">Group</li>
-            <li id='privateEvents' >Personal</li>
+            <li id='groupEvents' class="active">Групповые</li>
+            <li id='privateEvents' >Частные</li>
         </ul>
 
     </div>
@@ -101,13 +106,13 @@ $classEvent = new eventClass($conn);
                         <div class="features">
                             <ul>
                                 <li><img src="/assets/images/App/calendar-regular.svg" alt="calIcon">
-                                    <p>Every <?php echo $obj->schedule;?></p>
+                                    <p>По <?php echo $obj->schedule;?></p>
                                 </li>
                                 <li>
-                                    <p>Level: <span class="bold"><?php echo $obj->level;?></span></p>
+                                    <p>Уровень: <span class="bold"><?php echo $obj->level;?></span></p>
                                 </li>
                                 <li>
-                                    <p>Duration: <span class="bold"><?php echo $obj->duration;?> min</span></p>
+                                    <p>Длительность: <span class="bold"><?php echo $obj->duration;?> мин</span></p>
                                 </li>
                             </ul>
                         </div>
@@ -116,15 +121,15 @@ $classEvent = new eventClass($conn);
                             <?php
                             if ($obj->confirmed == 0) {
                                 echo '<div class="notConfirmed">
-                                <p class="nextText">Next lesson: <span class="bold">' . $obj->date . '</span> at <span
+                                <p class="nextText">Следующее занятие: <span class="bold">' . $obj->date . '</span> в <span
                                             class="bold">' . $obj->time . '</span></p>
-                                <p>Booking not confirmed yet.</p>
-                                <p>Please, wait for confirmation</p>
-                                <p class="or">- OR -</p>
+                                <p>Занятие еще не подтверждено.</p>
+                                <p>Пожалуйста, дождитесь подтверждения</p>
+                                <p class="or">- или -</p>
                             </div>';
                             }else{
                                 echo '<div class="сonfirmed">
-                                    <p class="nextText">Next lesson: <span class="bold">' . $obj->date . '</span> at <span class="bold">' . $obj->time . '</span></p>
+                                    <p class="nextText">Следующее занятие: <span class="bold">' . $obj->date . '</span> в <span class="bold">' . $obj->time . '</span></p>
                             </div>';
                             }
 
@@ -132,7 +137,7 @@ $classEvent = new eventClass($conn);
 
                         </div>
                         <div class="contactInstructor">
-                            <?php echo '<a href="contact-instructor.php?user='.$user.'&page=events&instructor=' . $obj->instructor . '&student=' . $obj->student . '"><p>Contact Instructor</p></a>';?>
+                            <?php echo '<a href="contact-instructor.php?user='.$user.'&page=events&instructor=' . $obj->instructor . '&student=' . $obj->student . '"><p>Связаться с инструктором</p></a>';?>
                             <i class="far fa-comment"></i>
                         </div>
 
@@ -178,7 +183,7 @@ $classEvent = new eventClass($conn);
                 </div>
                 <div class="body">
 
-                    <p class="lessonWith">Lesson with <span class="bold">
+                    <p class="lessonWith">Практика с <span class="bold">
                         <?php echo '<a href="instructor.php?user='.$user.'&id=' . $obj->instructor . '&student=' . $obj->student . '&event=' . $obj->event . '">' . $obj->first_name . ' ' . $obj->last_name . '</a>';?>
                     </span></p>
 
@@ -188,18 +193,18 @@ $classEvent = new eventClass($conn);
                         <?php
                         if ($obj->confirmed == 0) {
                             echo '<div class="notConfirmed">
-                            <p class="nextText">Next lesson: <span class="bold">' . $obj->date . '</span> at <span class="bold">' . $obj->time . '</span></p>
-                            <p>Booking not confirmed yet.</p>
-                            <p>Please, wait for confirmation</p>
-                            <button onclick="location.href =\'changePrivateEvent.php?user='.$user.'&page=events&id='.$obj->event.'\'" class="change" >Change booking</button>
-                            <p class="or">- OR -</p>
+                            <p class="nextText">Следующее занятие: <span class="bold">' . $obj->date . '</span> в <span class="bold">' . $obj->time . '</span></p>
+                            <p>Занятие еще не подтверждено.</p>
+                                <p>Пожалуйста, дождитесь подтверждения</p>
+                            <button onclick="location.href =\'changePrivateEvent.php?user='.$user.'&page=events&id='.$obj->event.'\'" class="change" >Изменить запись</button>
+                            <p class="or">- или -</p>
                         </div>';
                         } else{
                             echo '<div class="confirmed">
-                            <p class="nextText">Next lesson: <span class="bold">' . $obj->date . '</span> at <span class="bold">' . $obj->time . '</span>
+                            <p class="nextText">Следующее занятие: <span class="bold">' . $obj->date . '</span> в <span class="bold">' . $obj->time . '</span>
                             </p>
-                            <button onclick="location.href =\'changePrivateEvent.php?user='.$user.'&page=events&id='.$obj->event.'\'" class="change" >Change booking</button>
-                            <p class="or">- OR -</p>
+                            <button onclick="location.href =\'changePrivateEvent.php?user='.$user.'&page=events&id='.$obj->event.'\'" class="change" >Изменить запись</button>
+                            <p class="or">- или -</p>
                         </div>';
                         }
                         ?>
@@ -207,7 +212,7 @@ $classEvent = new eventClass($conn);
 
                     </div>
                     <div class="contactInstructor">
-                        <?php echo '<a href="contact-instructor.php?user='.$user.'&page=events&instructor=' . $obj->instructor . '&student=' . $user . '"><p>Contact Instructor</p></a>';?>
+                        <?php echo '<a href="contact-instructor.php?user='.$user.'&page=events&instructor=' . $obj->instructor . '&student=' . $user . '"><p>Связаться с инструктором</p></a>';?>
                         <i class="far fa-comment"></i>
                     </div>
 

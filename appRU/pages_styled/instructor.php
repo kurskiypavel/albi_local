@@ -7,7 +7,13 @@ require_once '../config.php';
 //get id of clicked item from url
 
 $id = $_GET['id'];
-$user = $_GET['user'];
+//$user = $_GET['user'];
+session_start();
+$user = $_SESSION['user_id'];
+
+
+require_once '../parts/header.php';
+
 
 
 
@@ -30,7 +36,7 @@ $obj = $result->fetch_object();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Instructor</title>
+    <title>Инструктор</title>
     <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styleApp.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -75,7 +81,7 @@ $obj = $result->fetch_object();
 
 <body class="instructorPage">
     <div class="header">
-        <h3>Instructor</h3>
+        <h3>Инструктор</h3>
 
     </div>
     <div class="body">
@@ -84,7 +90,7 @@ $obj = $result->fetch_object();
                 <div class="headerInstructor" style="background-image: url(../../assets/images/App/how_to_become_a_yoga_instructor.png);">
                 </div>
                 <div class="body">
-                    <h3>Albina Kurskaya</h3>
+                    <h3>Альбина Курская</h3>
                 </div>
             </div>
         </div>
@@ -92,16 +98,17 @@ $obj = $result->fetch_object();
             <div class="stats">
                 <ul>
                     <li>
-                        <?php echo '<p>Offers <span class="bold">' . $obj->programsCount . '</span> program' . ($obj->programsCount != 1 ? 's </p>' : '</p>');?>
+<!--                        --><?php //echo '<p>Предлагает <span class="bold">' . $obj->programsCount . '</span> программ' . ($obj->programsCount > 1 && (($obj->programsCount % 2)!=1 && $obj->programsCount < 4) ? 'ы </p>' : 'у</p>');?>
+                        <p>Предлагает <span class="bold">7</span> программ</p>
                     </li>
                 </ul>
             </div>
             <div class="bookDiv">
-                <?php echo '<a class="book" href="bookPrivateEvent.php?user=' . $user . '&student=' . $user . '&instructor=' . $id . '">Book private lesson</a>';?>
+                <?php echo '<a class="book" href="bookPrivateEvent.php?user=' . $user . '&student=' . $user . '&instructor=' . $id . '">Взять частный урок</a>';?>
             </div>
 
             <div class="about">
-                <h3>About instructor</h3>
+                <h3>Об инструкторе</h3>
                 <p><?php echo $obj->about; ?></p>
             </div>
 
@@ -109,8 +116,7 @@ $obj = $result->fetch_object();
 
             <div class="contactInstructor">
                 <a href='contact-instructor.php?user=<?php echo $user; ?>&page=instructor&instructor=<?php echo $id; ?>&student=<?php echo $user; ?>'>
-                    <p>Contact
-                        Instructor</p></a>
+                    <p>Связаться с инструктором</p></a>
                 <i class="far fa-comment"></i>
             </div>
         </div>

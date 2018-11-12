@@ -7,7 +7,13 @@ require_once '../classes/programClass.php';
 //class
 $classProgram = new programClass($conn);
 
-$user = $_GET['user'];
+//$user = $_GET['user'];
+session_start();
+$user = $_SESSION['user_id'];
+
+
+require_once '../parts/header.php';
+
 $id = $_GET['id'];
 
 
@@ -26,7 +32,7 @@ $obj = $result->fetch_object();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Program</title>
+    <title>Программа</title>
     <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styleApp.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -99,7 +105,7 @@ $obj = $result->fetch_object();
             <div class="features">
                 <ul>
                     <li><img src="../../assets/images/App/calendar-regular.svg" alt="calIcon">
-                        <p>Every <?php echo $obj->schedule; ?></p>
+                        <p>По <?php echo $obj->schedule; ?></p>
                     </li>
                     <li>
                         <?php
@@ -109,11 +115,11 @@ $obj = $result->fetch_object();
                         $rows = $result->num_rows;
                         $objEvent = $result->fetch_object();
                         if (!$objEvent) {
-                            echo '<button class="book" onclick="location.href =\'bookGroupEvent.php?user=' . $user . '&page=program&program=' . $id . '&student=' . $user . '&instructor=' . $obj->instructor_id . '\'">Book place in group</button>';
+                            echo '<button class="book" onclick="location.href =\'bookGroupEvent.php?user=' . $user . '&page=program&program=' . $id . '&student=' . $user . '&instructor=' . $obj->instructor_id . '\'">Записаться в группу</button>';
 
                         } elseif ($objEvent) {
                             //already booked - event query
-                            echo '<button class="booked" onclick="location.href =\'changeGroupEvent.php?user=' . $user . '&page=program&id=' . $objEvent->id . '\'">Change booking</button>';
+                            echo '<button class="booked" onclick="location.href =\'changeGroupEvent.php?user=' . $user . '&page=program&id=' . $objEvent->id . '\'">Изменить запись</button>';
                         }
                         //        booking functionality ENDS
                         ?>
@@ -122,30 +128,30 @@ $obj = $result->fetch_object();
                 </ul>
             </div>
             <div class="overview">
-                <h3>Overview</h3>
+                <h3>Обзор</h3>
                 <ul>
                     <li>
-                        <p>Focus: <?php echo $obj->focus; ?></p>
+                        <p>Фокус: <?php echo $obj->focus; ?></p>
                     </li>
                     <li>
-                        <p>Level: <span class="bold"><?php echo $obj->level; ?></span></p>
+                        <p>Уровень: <span class="bold"><?php echo $obj->level; ?></span></p>
                     </li>
                     <li>
-                        <p>Duration: <span class="bold"><?php echo $obj->duration; ?></span> min</p>
+                        <p>Длительность: <span class="bold"><?php echo $obj->duration; ?></span> мин</p>
                     </li>
                     <li>
-                        <p>Group size: <span class="bold"><?php echo $obj->group_size; ?></span> people</p>
+                        <p>Размер группы: <span class="bold"><?php echo $obj->group_size; ?></span> человек</p>
                     </li>
                 </ul>
             </div>
 
             <div class="description">
-                <h3>Description</h3>
+                <h3>Описание</h3>
                 <p><?php echo $obj->description; ?></p>
             </div>
 
             <div class="instructor">
-                <h3>Instructor</h3>
+                <h3>Инструктор</h3>
                 <a href="instructor.php?user=<?php echo $user; ?>&id=<?php echo $obj->instructor_id; ?>">
                     <div class="subInstructor">
                         <div class="headerInstructor"
@@ -155,7 +161,7 @@ $obj = $result->fetch_object();
                         <div class="body">
                             <h3><?php echo $obj->first_name . ' ' . $obj->last_name; ?></h3>
                             <p class="shortDescription"><?php echo $obj->about; ?></p>
-                            <p class="more">read more</p>
+                            <p class="more">подробнее</p>
                         </div>
 
                     </div>

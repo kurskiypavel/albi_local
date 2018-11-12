@@ -5,7 +5,13 @@ require_once '../config.php';
 //instructor id
 $instructor = '1';
 
-$user = $_GET['user'];
+//$user = $_GET['user'];
+session_start();
+$user = $_SESSION['user_id'];
+
+
+require_once '../parts/header.php';
+
 $page = $_GET['page'];
 ?>
 
@@ -17,7 +23,7 @@ $page = $_GET['page'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Contact instructor</title>
+    <title>Связаться с инструктором</title>
     <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styleApp.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -77,24 +83,6 @@ $facebook = $obj->facebook;
 $instagram = $obj->instagram;
 
 
-
-//if ($email) {
-//    echo '<a href="mailto:' . $email . '?Subject=Hello%20again" target="_top">Write Message</a> </br>';
-//}
-//
-//if ($phone) {
-//    echo '<a href="tel:' . $phone . '">Call</a> </br>';
-//}
-//if (($email || $phone) && ($facebook || $instagram)) {
-//    echo '<p>- OR -</p>';
-//}
-//if ($facebook) {
-//    echo '<a href="https://www.facebook.com/' . $facebook . '">Facebook</a>';
-//}
-//
-//if ($instagram) {
-//    echo '<a href="https://www.instagram.com' . $instagram . '">Instagram</a>';
-//}
 ?>
 
     <div class="contactInstructorPage">
@@ -110,20 +98,20 @@ $instagram = $obj->instagram;
             }
 
             ?>
-            <h3>Contact instructor</h3>
+            <h3>Способы связи</h3>
         </div>
         <div class="contactBlock">
             <a class='btn message' href="mailto:Albina.kurskaya@gmail.com?Subject=Question" target="_top">
                 <i class="far fa-envelope"></i>
-                <p>Write message</p>
+                <p>Написать письмо</p>
             </a>
 
             <a class='btn call' href="tel:+79636861278">
                 <i class="fas fa-phone"></i>
-                <p>Call</p>
+                <p>Позванить</p>
             </a>
 
-            <p class="or">- OR -</p>
+            <p class="or">- или -</p>
 
             <a class="facebook" href="https://www.facebook.com/profile.php?id=1109115237">
                 <img  src="../../assets/images/App/flogo_RGB_HEX-144.png" alt="Facebook">

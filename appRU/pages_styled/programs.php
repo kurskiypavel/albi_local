@@ -4,7 +4,13 @@
 require_once '../config.php';
 require_once '../classes/programClass.php';
 
-$user = $_GET['user'];
+//$user = $_GET['user'];
+session_start();
+$user = $_SESSION['user_id'];
+
+
+require_once '../parts/header.php';
+
 
 $classProgram = new programClass($conn);
 
@@ -19,7 +25,7 @@ $classProgram = new programClass($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Programs</title>
+    <title>Программы</title>
     <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styleApp.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -85,15 +91,15 @@ $objUser = $result->fetch_object();
 <div class="header">
     <div class="searchBar">
         <div class="input">
-            <input id='myInput' onkeyup="myFunction(); showAllPrograms();" type="text" placeholder="Search programs...">
+            <input id='myInput' onkeyup="myFunction(); showAllPrograms();" type="text" placeholder="Найти программу...">
             <i class="fas fa-search"></i>
         </div>
     </div>
 
 
     <ul class='programLists'>
-        <li id='newProgram'>New Programs</li>
-        <li id='allProgram' class="active">All Programs</li>
+        <li id='newProgram'>Новые</li>
+        <li id='allProgram' class="active">Все</li>
     </ul>
 
 </div>
@@ -137,22 +143,22 @@ $objUser = $result->fetch_object();
                     <div class="features">
                         <ul>
                             <li><img src="../../assets/images/App/calendar-regular.svg" alt="calIcon">
-                                <p>Every ' . $obj->schedule . '</p>
+                                <p>По ' . $obj->schedule . '</p>
                             </li>
                             <li>
-                                <p>Level: <span class="bold">' . $obj->level . '</span></p>
+                                <p>Уровень: <span class="bold">' . $obj->level . '</span></p>
                             </li>
                             <li>
-                                <p>Duration: <span class="bold">' . $obj->duration . ' min</span></p>
+                                <p>Длительность: <span class="bold">' . $obj->duration . ' мин</span></p>
                             </li>
                         </ul>
                     </div>
 
                     <div class="description">
-                        <h3>Description</h3>
+                        <h3>Описание</h3>
                         <p class="shortDescription">' . $obj->description . '</p>
 
-                        <p class="more">read more</p>
+                        <p class="more">подробнее</p>
 
                     </div></a>';
 
@@ -164,10 +170,10 @@ $objUser = $result->fetch_object();
             $objEvent = $resultEvent->fetch_object();
             //book place - redirect to bookGroupevent
             if (!$objEvent) {
-                echo '<button class="book" onclick="location.href =\'bookGroupEvent.php?user=' . $user . '&page=programs&program=' . $obj->id . '&student=' . $user . '&instructor=' . $obj->instructor_id . '\'">Book place in group</button>';
+                echo '<button class="book" onclick="location.href =\'bookGroupEvent.php?user=' . $user . '&page=programs&program=' . $obj->id . '&student=' . $user . '&instructor=' . $obj->instructor_id . '\'">Записаться в группу</button>';
             } elseif ($objEvent) {
                 //already booked - event query
-                echo '<button class="booked" onclick="location.href =\'changeGroupEvent.php?user=' . $user . '&page=programs&id=' . $objEvent->id . '\'">Change booking</button>';
+                echo '<button class="booked" onclick="location.href =\'changeGroupEvent.php?user=' . $user . '&page=programs&id=' . $objEvent->id . '\'">Изменить запись</button>';
             }
 
             echo '</div>
@@ -220,22 +226,22 @@ $objUser = $result->fetch_object();
                     <div class="features">
                         <ul>
                             <li><img src="../../assets/images/App/calendar-regular.svg" alt="calIcon">
-                                <p>Every ' . $obj->schedule . '</p>
+                                <p>По ' . $obj->schedule . '</p>
                             </li>
                             <li>
-                                <p>Level: <span class="bold">' . $obj->level . '</span></p>
+                                <p>Уровень: <span class="bold">' . $obj->level . '</span></p>
                             </li>
                             <li>
-                                <p>Duration: <span class="bold">' . $obj->duration . ' min</span></p>
+                                <p>Длительность: <span class="bold">' . $obj->duration . ' мин</span></p>
                             </li>
                         </ul>
                     </div>
 
                     <div class="description">
-                        <h3>Description</h3>
+                        <h3>Описание</h3>
                         <p class="shortDescription">' . $obj->description . '</p>
 
-                        <p class="more">read more</p>
+                        <p class="more">подробнее</p>
 
                     </div>
                     </a>';
@@ -248,10 +254,10 @@ $objUser = $result->fetch_object();
             $objEvent = $resultEvent->fetch_object();
             //book place - redirect to bookGroupevent
             if (!$objEvent) {
-                echo '<button class="book" onclick="location.href =\'bookGroupEvent.php?user=' . $user . '&page=programs&program=' . $obj->id . '&student=' . $user . '&instructor=' . $obj->instructor_id . '\'">Book place in group</button>';
+                echo '<button class="book" onclick="location.href =\'bookGroupEvent.php?user=' . $user . '&page=programs&program=' . $obj->id . '&student=' . $user . '&instructor=' . $obj->instructor_id . '\'">Записаться в группу</button>';
             } elseif ($objEvent) {
                 //already booked - event query
-                echo '<button class="booked" onclick="location.href =\'changeGroupEvent.php?user=' . $user . '&page=programs&id=' . $objEvent->id . '\'">Change booking</button>';
+                echo '<button class="booked" onclick="location.href =\'changeGroupEvent.php?user=' . $user . '&page=programs&id=' . $objEvent->id . '\'">Изменить запись</button>';
             }
 
             echo '</div>

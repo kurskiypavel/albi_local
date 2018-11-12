@@ -1,51 +1,47 @@
 <?php
 
-
 // Connection with DB
 require_once '../config.php';
 require_once '../classes/eventClass.php';
 
 //get id of clicked item from url
-$id = $_GET['id'];
-$user = $_GET['user'];
+$program = $_GET['program'];
+$student = $_GET['student'];
+$instructor = '1';
 $page = $_GET['page'];
+//$user = $_GET['user'];
+session_start();
+$user = $_SESSION['user_id'];
+
+
+require_once '../parts/header.php';
+
+
+
 
 $obj = new eventClass($conn);
 
-$queryEvent = "SELECT * FROM events WHERE id='$id'";
-$resultEvent = $conn->query($queryEvent);
-if (!$resultEvent) die($conn->connect_error);
-$rowsEvent = $resultEvent->num_rows;
-$objEvent = $resultEvent->fetch_object();
-
-
 if ($_POST) {
-    if (isset($_POST['changePrivateEvent'])) {
+    if (isset($_POST['createGroupEvent'])) {
 
 
         $date = htmlspecialchars($_POST['date']);
         $time = htmlspecialchars($_POST['time']);
         $comment = htmlspecialchars($_POST['comment']);
+        $confirmed = '0';
+        $canceled = '0';
+        $group_event_id=$program.'and'.$date.'and'.$time;
 
+        //createGroupEvent
+        $obj->createGroupEvent($group_event_id,$program,
+            $student,$instructor,
+            $date,$time,$comment,
+            $confirmed,$canceled);
+        if($page=='programs') {
+            echo "<script>location.href = 'programs.php?user=".$user."';</script>";
+        } elseif ($page=='program') {
+            echo "<script>location.href = 'program.php?user=".$user."&id=".$program."';</script>";
 
-        //changePrivateEvent
-        $obj->updatePrivate($date, $time, $id, $comment);
-
-
-        if ($page == 'instructor') {
-            echo "<script>location.href = 'instructor.php?user=" . $user . "&id=" . $objEvent->instructor . "';</script>";
-        } elseif ($page == 'events') {
-            echo "<script>location.href = 'events.php?user=" . $user . "';</script>";
-        }
-
-    } elseif (isset($_POST['deletePrivateEvent'])) {
-
-        //deletePrivateEvent
-        $obj->delete($id);
-        if ($page == 'instructor') {
-            echo "<script>location.href = 'instructor.php?user=" . $user . "&id=" . $objEvent->instructor . "';</script>";
-        } elseif ($page == 'events') {
-            echo "<script>location.href = 'events.php?user=" . $user . "';</script>";
         }
 
     }
@@ -53,8 +49,8 @@ if ($_POST) {
 }
 
 
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,7 +58,7 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Change booking</title>
+    <title>Записаться в группу</title>
     <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/styleApp.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
@@ -106,30 +102,26 @@ if ($_POST) {
 </head>
 
 <body style="background: unset;">
-    <div class="changePrivateEventPage">
+    <div class="bookGroupEventPage">
         <div class="header">
-            <a href='events.php?user=<?php echo $user;?>'><i class="fas fa-arrow-left"></i></a>
-            <h3>Change booking</h3>
+            <?php
+            if($page=='programs') {
+                echo "<a href='programs.php?user=$user'><i class=\"fas fa-arrow-left\"></i></a>";
+            } elseif ($page=='program') {
+                echo "<a href='program.php?user=$user&id=$program'><i class=\"fas fa-arrow-left\"></i></a>";
+            }
+
+            ?>
+
+            <h3>Записаться в группу</h3>
         </div>
 
-
         <form class='form' method="post">
-            <p class="label">Choose date</p><input class="gray" name='date' type="date" value="<?php echo $objEvent->date; ?>">
-            <p class="label">Choose time</p><input class="gray" name='time' type="time"  value="<?php echo $objEvent->time; ?>">
-            <p class="label">Comment</p><textarea name='comment' type="text" value=""><?php echo $objEvent->comment; ?></textarea>
+            <p class="label">Дата</p><input class="gray" name='date' type="date">
+            <p class="label">Время</p><input class="gray" name='time' type="time">
+            <p class="label">Комментарий</p><textarea class="" name='comment' type="text"></textarea>
 
-            <div class="repeatableDiv">
-                <p class="repeatableLabel">Make repeatable</p>
-                <div class="repeatableCheckbox">
-                    <input type='checkbox' class='ios8-switch' name="repeatable" id='checkbox-1'>
-                    <!-- get to DB by checked property -->
-                    <label for='checkbox-1'></label>
-                </div>
-            </div>
-
-            <input class="button" name="changePrivateEvent" type="submit" value="Change">
-            <input class="cancel" name="deletePrivateEvent" type="submit" value="Cancel booking">
-
+            <input class="button" name="createGroupEvent" type="submit" value="Готово">
         </form>
         <?php include_once '../parts/footer.php'?>
     </div>
