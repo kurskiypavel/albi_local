@@ -2,7 +2,7 @@
 // Connection with DB
 require_once 'appRU/config.php';
 // define variables and initialize with empty values
-$phone =$first_name= $password = $confirm_password = "";
+$phone = $first_name = $password = $confirm_password = "";
 $phone_err = $password_err = $confirm_password_err = "";
 
 // processing form data when form is submitted
@@ -37,7 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 
-    $first_name = htmlspecialchars(trim($_POST["first_name"]));
+    // validate password
+    if (empty(trim($_POST['first_name']))) {
+        $name_err = "Please enter name.";
+    } else {
+        $first_name = htmlspecialchars(trim($_POST["first_name"]));
+    }
 
     // validate password
     if (empty(trim($_POST['password']))) {
@@ -107,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user_id'] = $user_id;
                 }
                 // redirect to home page
-                header("location: appRU/pages_styled/programs.php?user=".$user_id);
+                header("location: appRU/pages_styled/programs.php?user=" . $user_id);
             }
         }
         // close statement
@@ -123,50 +128,96 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Регистрация</title>
+    <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styleApp.css">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
 
 </head>
-<body>
+<body style="background: unset;">
 
-<div class="container">
-    <div class="row">
+<div class="registerPage">
+    <div class="header">
+        <a id='backHome' href='http://albi-local:8888/newIndex.html'><i class="fas fa-arrow-left"></i></a>
+        <h3>Register</h3>
+    </div>
+    <div class="">
 
         <div class="">
-            <h2>Sign Up</h2>
-            <p>Please fill this form to create an account.</p>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class=" ">
-                    <label>Your name</label>
-                    <input type="text" name="first_name"  value="">
 
+
+            <form class='form' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
+                <div class="slide1">
+                    <p class='label'>Enter your mobile phone</p>
+                    <input id='yourphone2' type="tel" class='gray' name="phone" value="<?php echo $phone; ?>">
+                    <span class="error">
+                            <?php echo $phone_err; ?>
+                    </span>
+
+                    <p class='label'>Enter your name</p>
+                    <input class='gray' type="text" name="first_name" value="<?php echo $first_name; ?>">
+                    <span class="error">
+                            <?php echo $name_err; ?>
+                    </span>
+
+                    <button class='buttonNext'>Next <i class="fas fa-angle-right"></i></button>
                 </div>
-                <div class=" <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
-                    <label>Phone number</label>
-                    <input type="text" name="phone"  value="<?php echo $phone; ?>">
-                    <span class="help-block"><?php echo $phone_err; ?></span>
-                </div>
-                <div class=" <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                    <label>Password</label>
-                    <input type="password" name="password"  value="<?php echo $password; ?>">
-                    <span class="help-block"><?php echo $password_err; ?></span>
-                </div>
-                <div class=" <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                    <label>Confirm Password</label>
-                    <input type="password" name="confirm_password"
+
+                <div style='display:none;' class="slide2">
+                    <p class='label'>Enter password</p>
+                    <input class='password' type="password" name="password" value="<?php echo $password; ?>">
+                    <span class="error">
+                        <?php echo $password_err; ?>
+                    </span>
+
+                    <p class='label'>Confirm password</p>
+                    <input class='password' type="password" name="confirm_password"
                            value="<?php echo $confirm_password; ?>">
-                    <span class="help-block"><?php echo $confirm_password_err; ?></span>
+
+                    <span class="error">
+                        <?php echo $confirm_password_err; ?>
+                    </span>
+                    <button class='buttonRegister' type="submit">Register</button>
                 </div>
-                <div class="">
-                    <input type="submit"  value="Submit">
-                    <input type="reset"  value="Reset">
-                </div>
-                <p>Already have an account? <a href="login.php">Login here</a>.</p>
+
+
             </form>
+            <button class='buttonLogin'>Login</button>
         </div>
-        <div class="col s4"></div>
+        <div class=""></div>
     </div>
 
-    
+
+    <script
+            src="//code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src='//s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js'></script>
+    <script src="assets/js/phoneMask.js"></script>
+
+    <script>
+        $('.buttonLogin').click(function () {
+            location.href = 'login.php';
+        })
+
+        $('.buttonNext').click(function (e) {
+            e.preventDefault();
+            var err = '<?php echo $name_err . $phone_err; ?>';
+            if (!err) {
+                $('.slide1').css('display', 'none');
+                $('.slide2').css('display', 'block');
+            }
+
+        })
+
+    </script>
+
 
 </body>
 </html>

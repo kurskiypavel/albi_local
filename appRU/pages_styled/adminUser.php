@@ -142,7 +142,8 @@ $obj = $result->fetch_object();
             <li>
                 <div class="subContent">
                     <span class="bold">Телефон</span>
-                    <input name='phone' value="<?php echo $obj->phone; ?>" type="text" placeholder="—">
+                    <input id='yourphone2' type="tel" name='phone' value="<?php echo $obj->phone; ?>" type="text" placeholder="—">
+                    
                 </div>
             </li>
 
@@ -156,7 +157,9 @@ $obj = $result->fetch_object();
 <script
 			  src="//code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			  crossorigin="anonymous"></script>
+              crossorigin="anonymous"></script>
+              <script src='//s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js'></script>
+<script src="assets/js/phoneMask.js"></script>
 
 </body>
 

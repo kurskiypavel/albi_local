@@ -104,7 +104,7 @@ $obj = $result->fetch_object();
                 </li>
                 <li>
                     <!--                        <p>Member Since <span class="bold">8 Months Ago</span></p>-->
-                    <p>Вы присоединились <span class="bold"><?php echo $obj->created_at; ?></span> назад</p>
+                    <p>Вы присоединились <span id='joinDate'></span></p>
                 </li>
             </ul>
         </div>
@@ -117,7 +117,7 @@ $obj = $result->fetch_object();
                 </li>
                 <li>
                     <!--                        <p><span class="bold">Birthdate: </span>2011-11-11</p>-->
-                    <p><span class="bold">Дата рождения: </span><?php echo $obj->birthdate; ?></p>
+                    <p><span class="bold">Дата рождения: </span><span id="bdateRU"></span></p>
                     <p class="hide" style="display: none;"><span class="bold">Дата рождения: </span>—/—/— —</p>
                 </li>
 
@@ -191,6 +191,32 @@ $obj = $result->fetch_object();
         crossorigin="anonymous"></script>
 
 <script src="../js/app.js"></script>
+<script src="../../assets/js/moment.min.js"></script>
+<script>
+    //Format birthdate date output
+    //grab birthday date
+    var birthday = "<?php echo $obj->bdate; ?>";
+    if (birthday) {
+        //format rules
+        var momentBirth = moment(birthday);
+        //output the result on page
+        momentBirth.locale('ru');
+        var momentBirthRU = momentBirth.format("DD MMM YYYY");        
+        
+        //output the result on page
+        $('#bdateRU').text(momentBirthRU);
+    }
+
+    //Format join date output from now on Page:product.php Field:product join element
+    //grab join date
+    var joinDate = '<?php echo $obj->created_at; ?>';
+    
+        //format rule
+        let momentjoinDate = moment(joinDate, "YYYYMMDD").locale('ru').fromNow();
+        //output the result on page
+        $('#joinDate').text(momentjoinDate);
+    
+</script>
 </body>
 
 </html>
