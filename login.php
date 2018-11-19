@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             session_start();
                             $_SESSION['phone'] = $phone;
                             $_SESSION['user_id'] = $user_id;
-                            header("location: appRU/pages_styled/events.php?user=".$user_id);
+                            header("location: appRU/pages_styled/events.php?user=" . $user_id);
                         } else {
                             // display an error message if password is not valid
                             $password_err = 'The password you entered was not valid.';
@@ -75,43 +75,85 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Войти</title>
+    <link href="https://cdn.jsdelivr.net/npm/flexiblegrid@v1.2.2/dist/css/flexible-grid.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styleApp.css">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
+
 </head>
-<body>
-<div class="container">
-    
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col s4"></div>
-        <div class="col s4 userForm">
-            <h2>Login</h2>
-            <p>Please fill in your credentials to login.</p>
+<body style="background: unset;">
 
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
-                    <label>phone</label>
-                    <input type="text" name="phone" class="form-control" value="<?php echo $phone; ?>">
-                    <span class="help-block"><?php echo $phone_err; ?></span>
-                </div>
-                <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control">
-                    <span class="help-block"><?php echo $password_err; ?></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Login">
-                </div>
-                <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-                <p>Forgot password? <a href="forgot.php">Here</a></p>
-            </form>
-            
-        </div>
-        <div class="col s4"></div>
+<div class="loginPage">
+    <div class="header">
+        <a id='backHome' href='http://albi-local:8888/newIndex.html'><i class="fas fa-arrow-left"></i></a>
+        <h3>Login</h3>
     </div>
+
+
+    <form class='form' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+
+        <div class="slide1">
+
+            <p class='label'>Enter your mobile phone</p>
+            <input id='yourphone2' type="tel" class='gray' name="phone" value="<?php echo $phone; ?>">
+            
+            <button class='buttonNext'>Next <i class="fas fa-angle-right"></i></button>
+            <span class="error"><?php echo $phone_err; ?></span>
+        </div>
+        <div style='display:none;' class="slide2">
+
+            <p class='label'>Enter password</p>
+            <input class='password' type="password" name="password">
+            
+
+
+            <input class='buttonLogin' type="submit" value="Login">
+            <button class='buttonForgot' href="forgot.php">Forgot your password?</button>
+            <span class="error">
+                            <?php echo $password_err; ?>
+                        </span>
+        </div>
+    </form>
+
+    <p class='dont'>Don't have an account?</p>
+    <button class='buttonRegister' href="register.php">Register</button>
+
 </div>
 
+<script
+        src="//code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src='//s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js'></script>
+<script src="assets/js/phoneMask.js"></script>
+
+<script>
+    $('.buttonRegister').click(function (e) {
+        e.preventDefault();
+        location.href = 'register.php';
+    });
+
+    $('.buttonForgot').click(function (e) {
+        e.preventDefault();
+        location.href = 'forgot.php';
+    });
+
+    $('.buttonNext').click(function (e) {
+        e.preventDefault();
+        var err = '<?php echo $phone_err; ?>';
+        if (!err) {
+            $('.slide1').css('display', 'none');
+            $('.slide2').css('display', 'block');
+        }
+
+    })
+
+</script>
 
 
 </body>

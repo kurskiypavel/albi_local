@@ -146,77 +146,64 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a id='backHome' href='http://albi-local:8888/newIndex.html'><i class="fas fa-arrow-left"></i></a>
         <h3>Register</h3>
     </div>
-    <div class="">
-
-        <div class="">
 
 
-            <form class='form' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <form class='form' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-                <div class="slide1">
-                    <p class='label'>Enter your mobile phone</p>
-                    <input id='yourphone2' type="tel" class='gray' name="phone" value="<?php echo $phone; ?>">
-                    <span class="error">
-                            <?php echo $phone_err; ?>
-                    </span>
+        <div class="slide1">
+            <p class='label'>Enter your mobile phone</p>
+            <input id='yourphone2' type="tel" class='gray' name="phone" value="<?php echo $phone; ?>">
+            <span class="error"><?php echo $phone_err; ?></span>
 
-                    <p class='label'>Enter your name</p>
-                    <input class='gray' type="text" name="first_name" value="<?php echo $first_name; ?>">
-                    <span class="error">
-                            <?php echo $name_err; ?>
-                    </span>
+            <p class='label'>Enter your name</p>
+            <input class='gray' type="text" name="first_name" value="<?php echo $first_name; ?>">
+            <span class="error"><?php echo $name_err; ?></span>
 
-                    <button class='buttonNext'>Next <i class="fas fa-angle-right"></i></button>
-                </div>
-
-                <div style='display:none;' class="slide2">
-                    <p class='label'>Enter password</p>
-                    <input class='password' type="password" name="password" value="<?php echo $password; ?>">
-                    <span class="error">
-                        <?php echo $password_err; ?>
-                    </span>
-
-                    <p class='label'>Confirm password</p>
-                    <input class='password' type="password" name="confirm_password"
-                           value="<?php echo $confirm_password; ?>">
-
-                    <span class="error">
-                        <?php echo $confirm_password_err; ?>
-                    </span>
-                    <button class='buttonRegister' type="submit">Register</button>
-                </div>
-
-
-            </form>
-            <button class='buttonLogin'>Login</button>
+            <button class='buttonNext'>Next <i class="fas fa-angle-right"></i></button>
         </div>
-        <div class=""></div>
-    </div>
+
+        <div style='display:none;' class="slide2">
+            <p class='label'>Enter password</p>
+            <input class='password' type="password" name="password" value="<?php echo $password; ?>">
+            <span class="error"><?php echo $password_err; ?></span>
+
+            <p class='label'>Confirm password</p>
+            <input class='password' type="password" name="confirm_password"
+                   value="<?php echo $confirm_password; ?>">
+
+            <span class="error"><?php echo $confirm_password_err; ?></span>
+            <button class='buttonRegister' type="submit">Register</button>
+        </div>
 
 
-    <script
-            src="//code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script src='//s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js'></script>
-    <script src="assets/js/phoneMask.js"></script>
+    </form>
+    <button class='buttonLogin'>Login</button>
+</div>
 
-    <script>
-        $('.buttonLogin').click(function () {
-            location.href = 'login.php';
-        })
 
-        $('.buttonNext').click(function (e) {
-            e.preventDefault();
-            var err = '<?php echo $name_err . $phone_err; ?>';
-            if (!err) {
-                $('.slide1').css('display', 'none');
-                $('.slide2').css('display', 'block');
-            }
+<script
+        src="//code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src='//s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js'></script>
+<script src="assets/js/phoneMask.js"></script>
 
-        })
+<script>
+    $('.buttonLogin').click(function () {
+        location.href = 'login.php';
+    })
 
-    </script>
+    $('.buttonNext').click(function (e) {
+        e.preventDefault();
+        var err = '<?php echo $name_err . $phone_err; ?>';
+        if (!err) {
+            $('.slide1').css('display', 'none');
+            $('.slide2').css('display', 'block');
+        }
+
+    })
+
+</script>
 
 
 </body>

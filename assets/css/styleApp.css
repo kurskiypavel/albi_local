@@ -1842,7 +1842,8 @@ a {
       font-weight: 300; }
     .registerPage .form {
       width: 309px;
-      margin: 0 auto 93px auto; }
+      margin: 0 auto;
+      height: 300px; }
       .registerPage .form .label {
         font-size: 14px;
         font-family: 'museoSans300', sans-serif;
@@ -1874,6 +1875,8 @@ a {
         text-align: center;
         margin: 10px auto 0 auto;
         padding: 11px; }
+      .registerPage .form .slide1, .registerPage .form .slide2 {
+        padding-top: 25px; }
       .registerPage .form .buttonNext {
         width: 272px;
         height: 41px;
@@ -1904,6 +1907,221 @@ a {
         color: #F68170;
         font-size: 13px; }
     .registerPage .buttonLogin {
+      width: 272px;
+      height: 41px;
+      border: 1px #74777A solid;
+      color: #74777A;
+      background: #fff;
+      font-size: 15px;
+      font-family: 'museoSans300', sans-serif;
+      font-weight: 300;
+      border-radius: 8px;
+      text-align: center;
+      margin: 25px auto 0 auto; }
+
+  .loginPage {
+    text-align: center; }
+    .loginPage .header {
+      background: #fff;
+      height: 60px;
+      border: unset;
+      padding-top: 20px;
+      margin-bottom: 10px;
+      width: 286px;
+      background: #fff;
+      margin: 0 auto; }
+      .loginPage .header h3 {
+        font-size: 18px;
+        font-family: 'museoSans300', sans-serif;
+        left: -7px;
+        width: 244px;
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        top: -2px; }
+      .loginPage .header a {
+        color: unset; }
+      .loginPage .header i {
+        display: inline-block;
+        font-size: 24px; }
+    .loginPage h3,
+    .loginPage h4 {
+      font-family: 'museoSans500', sans-serif !important; }
+    .loginPage p,
+    .loginPage span {
+      font-family: 'museoSans300', sans-serif !important;
+      font-weight: 300; }
+    .loginPage .form {
+      width: 309px;
+      margin: 0 auto;
+      height: 300px; }
+      .loginPage .form .label {
+        font-size: 14px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        color: #74777A;
+        text-align: center;
+        margin-top: 21px; }
+        .loginPage .form .label:first-of-type {
+          margin-top: 5px; }
+      .loginPage .form .gray {
+        width: 271px;
+        height: 40px;
+        background: #EFEFF1;
+        font-size: 16px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        border-radius: 8px;
+        text-align: center;
+        margin: 10px auto 0 auto;
+        padding: 11px; }
+      .loginPage .form .password {
+        width: 184px;
+        height: 40px;
+        background: #EFEFF1;
+        font-size: 16px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        border-radius: 8px;
+        text-align: center;
+        margin: 10px auto 0 auto;
+        padding: 11px; }
+      .loginPage .form .slide1, .loginPage .form .slide2 {
+        padding-top: 25px; }
+      .loginPage .form .buttonNext, .loginPage .form .buttonLogin {
+        width: 272px;
+        height: 41px;
+        color: #fff;
+        background: #F68170;
+        font-size: 15px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        border-radius: 8px;
+        text-align: center;
+        margin: 25px auto 0 auto; }
+        .loginPage .form .buttonNext i, .loginPage .form .buttonLogin i {
+          position: relative;
+          left: 97px;
+          top: 2px; }
+      .loginPage .form .buttonForgot {
+        width: 272px;
+        height: 41px;
+        color: #74777A;
+        background: #EFEFF1;
+        font-size: 15px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        border-radius: 8px;
+        text-align: center;
+        margin: 25px auto 0 auto; }
+      .loginPage .form .error {
+        color: #F68170;
+        font-size: 13px; }
+    .loginPage .dont {
+      color: #74777A; }
+    .loginPage .buttonRegister {
+      width: 272px;
+      height: 41px;
+      border: 1px #74777A solid;
+      color: #74777A;
+      background: #fff;
+      font-size: 15px;
+      font-family: 'museoSans300', sans-serif;
+      font-weight: 300;
+      border-radius: 8px;
+      text-align: center;
+      margin: 25px auto 0 auto; }
+
+  .forgotPage {
+    text-align: center; }
+    .forgotPage .header {
+      background: #fff;
+      height: 60px;
+      border: unset;
+      padding-top: 20px;
+      margin-bottom: 10px;
+      width: 286px;
+      background: #fff;
+      margin: 0 auto; }
+      .forgotPage .header h3 {
+        font-size: 18px;
+        font-family: 'museoSans300', sans-serif;
+        left: -7px;
+        width: 244px;
+        display: inline-block;
+        text-align: center;
+        position: relative;
+        top: -2px; }
+      .forgotPage .header a {
+        color: unset; }
+      .forgotPage .header i {
+        display: inline-block;
+        font-size: 24px; }
+    .forgotPage h3,
+    .forgotPage h4 {
+      font-family: 'museoSans500', sans-serif !important; }
+    .forgotPage p,
+    .forgotPage span {
+      font-family: 'museoSans300', sans-serif !important;
+      font-weight: 300; }
+    .forgotPage .form {
+      width: 309px;
+      margin: 0 auto;
+      height: 300px; }
+      .forgotPage .form .label {
+        font-size: 14px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        color: #74777A;
+        text-align: center;
+        margin-top: 21px; }
+        .forgotPage .form .label:first-of-type {
+          margin-top: 5px; }
+      .forgotPage .form .gray {
+        width: 271px;
+        height: 40px;
+        background: #EFEFF1;
+        font-size: 16px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        border-radius: 8px;
+        text-align: center;
+        margin: 10px auto 0 auto;
+        padding: 11px; }
+      .forgotPage .form .password {
+        width: 184px;
+        height: 40px;
+        background: #EFEFF1;
+        font-size: 16px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        border-radius: 8px;
+        text-align: center;
+        margin: 10px auto 0 auto;
+        padding: 11px; }
+      .forgotPage .form .slide1, .forgotPage .form .slide2 {
+        padding-top: 25px; }
+      .forgotPage .form .buttonNext, .forgotPage .form .buttonRecover {
+        width: 272px;
+        height: 41px;
+        color: #fff;
+        background: #F68170;
+        font-size: 15px;
+        font-family: 'museoSans300', sans-serif;
+        font-weight: 300;
+        border-radius: 8px;
+        text-align: center;
+        margin: 25px auto 0 auto; }
+        .forgotPage .form .buttonNext i, .forgotPage .form .buttonRecover i {
+          position: relative;
+          left: 97px;
+          top: 2px; }
+      .forgotPage .form .error {
+        color: #F68170;
+        font-size: 13px; }
+    .forgotPage .dont {
+      color: #74777A; }
+    .forgotPage .buttonRegister {
       width: 272px;
       height: 41px;
       border: 1px #74777A solid;
