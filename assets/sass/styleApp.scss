@@ -300,9 +300,8 @@ a {
             color: $gray;
 
             font-size: 12px;
-            font-family: 'museoSans500', sans-serif;
-            font-weight: 500;
-            // margin: 20px;
+            font-family: 'museoSans300', sans-serif;
+            font-weight: 300;                
             margin-top: 10px;
             margin-bottom: 0;
             width: 24%;
@@ -332,6 +331,9 @@ a {
             .fa-user {
                 font-size: 30px;
             }
+        }
+        .fa-table,.fa-calendar-alt,.fa-user,.fa-clock {
+            font-size: 30px;
         }
     }
 
@@ -674,8 +676,7 @@ a {
                 color: $gray;
 
                 font-size: 12px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
+                
 
                 margin-top: 10px;
                 margin-bottom: 0;
@@ -693,21 +694,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 30px;
-                }
-
-                .fa-video {
-                    font-size: 30px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 30px;
-                }
-
-                .fa-user {
-                    font-size: 30px;
-                }
+                
             }
         }
     }
@@ -716,6 +703,25 @@ a {
         width: 303px;
         background: #fff;
         margin: 0 auto;
+
+        .changesNav{
+            position: fixed;
+            width: 100%;
+            padding: 18px 23px;
+            background: white;
+            top: 0;
+            height: 50px;
+            left: 0;
+            *{
+                padding: 0;background: unset;color: blue;font-size: 14px;font-family: museoSans300;
+                display: inline-block;
+            }
+            #cancel{
+                position: relative;
+                right: 0;
+                left: 146px;
+            }
+        }
 
         .header {
             background: #fff;
@@ -849,7 +855,7 @@ a {
 
             .favorites {
                 width: 272px;
-                margin-bottom: 120px;
+                // margin-bottom: 120px;
 
                 h3 {
                     font-size: 14px;
@@ -908,6 +914,12 @@ a {
                     }
                 }
             }
+            .logout{
+                width: 100%;text-align: center;
+                a{
+                    padding: 10px 20px;border: 1px solid #cfc7c7;border-radius: 8px;font-size: 14px;font-family: 'museoSans500', sans-serif;
+                }
+            }
         }
 
         .footerBar {
@@ -925,11 +937,7 @@ a {
             li {
                 display: inline-block;
                 color: $gray;
-
                 font-size: 12px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -946,27 +954,31 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 30px;
-                }
-
-                .fa-video {
-                    font-size: 30px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 30px;
-                }
-
-                .fa-user {
-                    font-size: 30px;
-                }
+                
             }
         }
+
     }
 
     .settingsPage {
         background: #fff;
+
+        .changesNav{
+            display: none;
+            position: absolute;
+            top: 25px;
+            width: 100%;
+            padding: 0 18px;
+            *{
+                padding: 0;background: unset;color: blue;font-size: 14px;font-family: museoSans300;
+                display: inline-block;
+            }
+            #cancel{
+                position: relative;
+                right: 0;
+                left: 166px;
+            }
+        }
 
         .header {
             background: #fff;
@@ -1008,8 +1020,8 @@ a {
             //font-weight: 700;
         }
 
-        p,
-        span {
+        form p,
+        form span {
             font-family: 'museoSans500', sans-serif !important;
             font-weight: 500;
         }
@@ -1086,9 +1098,6 @@ a {
                 color: $gray;
 
                 font-size: 12px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-
                 margin-top: 10px;
                 margin-bottom: 0;
                 width: 24%;
@@ -1106,21 +1115,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 30px;
-                }
-
-                .fa-video {
-                    font-size: 30px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 30px;
-                }
-
-                .fa-user {
-                    font-size: 30px;
-                }
+                
             }
         }
     }
@@ -1246,9 +1241,6 @@ a {
                 color: $gray;
 
                 font-size: 12px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -1605,9 +1597,6 @@ a {
                 color: $gray;
 
                 font-size: 12px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -1679,13 +1668,14 @@ a {
             //font-weight: 700;
         }
 
-        p,
-        span,
+        form p,
+        form span
 
-        a {
+        {
             font-family: 'museoSans500', sans-serif !important;
             font-weight: 500;
         }
+        
 
 
 
@@ -1849,9 +1839,6 @@ a {
                 color: $gray;
 
                 font-size: 12px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -1868,21 +1855,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 30px;
-                }
-
-                .fa-video {
-                    font-size: 30px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 30px;
-                }
-
-                .fa-user {
-                    font-size: 30px;
-                }
+                
             }
         }
 
@@ -2365,9 +2338,6 @@ a {
                 color: $gray;
 
                 font-size: 12px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -2384,21 +2354,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 30px;
-                }
-
-                .fa-video {
-                    font-size: 30px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 30px;
-                }
-
-                .fa-user {
-                    font-size: 30px;
-                }
+                
             }
         }
 
@@ -2632,9 +2588,6 @@ a {
                 color: $gray;
 
                 font-size: 12px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -2651,21 +2604,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 30px;
-                }
-
-                .fa-video {
-                    font-size: 30px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 30px;
-                }
-
-                .fa-user {
-                    font-size: 30px;
-                }
+                
             }
         }
     }
@@ -2748,7 +2687,7 @@ a {
                 font-weight: 300;
                 color: $gray;
                 text-align: center;
-                margin-top: 21px;
+                margin-top: 30px;
 
                 &:first-of-type {
                     margin-top: 5px;
@@ -2795,7 +2734,7 @@ a {
                 font-weight: 300;
                 border-radius: 8px;
                 text-align: center;
-                margin: 25px auto 0 auto;
+                margin: 30px auto 0 auto;
                 i{
                     position: relative;
                     left: 97px;
@@ -2812,11 +2751,14 @@ a {
                 font-weight: 300;
                 border-radius: 8px;
                 text-align: center;
-                margin: 25px auto 0 auto;
+                margin: 30px auto 0 auto;
             }
             .error{
                 color:$salmon;
                 font-size: 13px;
+                position: absolute;
+                width: 100%;
+                left: 0;
             }
 
         }
@@ -2943,7 +2885,7 @@ a {
                 font-weight: 300;
                 border-radius: 8px;
                 text-align: center;
-                margin: 25px auto 0 auto;
+                margin: 30px auto 0 auto;
                 i{
                     position: relative;
                     left: 97px;
@@ -2961,11 +2903,14 @@ a {
                 font-weight: 300;
                 border-radius: 8px;
                 text-align: center;
-                margin: 25px auto 0 auto;
+                margin: 30px auto 0 auto;
             }
             .error{
                 color:$salmon;
                 font-size: 13px;
+                position: absolute;
+                width: 100%;
+                left: 0;
             }
 
         }
@@ -3047,7 +2992,7 @@ a {
                 font-weight: 300;
                 color: $gray;
                 text-align: center;
-                margin-top: 21px;
+                margin-top: 30px;
 
                 &:first-of-type {
                     margin-top: 5px;
@@ -3095,7 +3040,7 @@ a {
                 font-weight: 300;
                 border-radius: 8px;
                 text-align: center;
-                margin: 25px auto 0 auto;
+                margin: 30px auto 0 auto;
                 i{
                     position: relative;
                     left: 97px;
@@ -3106,6 +3051,9 @@ a {
             .error{
                 color:$salmon;
                 font-size: 13px;
+                position: absolute;
+                width: 100%;
+                left: 0;
             }
 
         }
@@ -3393,10 +3341,7 @@ a {
             display: inline-block;
             color: $gray;
 
-            font-size: 13px;
-            font-family: 'museoSans500', sans-serif;
-            font-weight: 500;
-            // margin: 20px;
+            font-size: 12px;
             margin-top: 10px;
             margin-bottom: 0;
             width: 24%;
@@ -3757,10 +3702,7 @@ a {
                 display: inline-block;
                 color: $gray;
 
-                font-size: 13px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-
+                font-size: 12px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -3777,21 +3719,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 36px;
-                }
-
-                .fa-video {
-                    font-size: 36px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 36px;
-                }
-
-                .fa-user {
-                    font-size: 36px;
-                }
+                
             }
         }
     }
@@ -4009,10 +3937,7 @@ a {
                 display: inline-block;
                 color: $gray;
 
-                font-size: 13px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
+                font-size: 12px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -4029,21 +3954,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 36px;
-                }
-
-                .fa-video {
-                    font-size: 36px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 36px;
-                }
-
-                .fa-user {
-                    font-size: 36px;
-                }
+                
             }
         }
     }
@@ -4166,10 +4077,7 @@ a {
                 display: inline-block;
                 color: $gray;
 
-                font-size: 13px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-
+                font-size: 12px;
                 margin-top: 10px;
                 margin-bottom: 0;
                 width: 24%;
@@ -4187,21 +4095,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 36px;
-                }
-
-                .fa-video {
-                    font-size: 36px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 36px;
-                }
-
-                .fa-user {
-                    font-size: 36px;
-                }
+                
             }
         }
     }
@@ -4322,10 +4216,7 @@ a {
                 display: inline-block;
                 color: $gray;
 
-                font-size: 13px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
+                font-size: 12px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -4684,10 +4575,7 @@ a {
                 display: inline-block;
                 color: $gray;
 
-                font-size: 13px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-
+                font-size: 12px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -4927,10 +4815,7 @@ a {
                 display: inline-block;
                 color: $gray;
 
-                font-size: 13px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
+                font-size: 12px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -4947,21 +4832,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 36px;
-                }
-
-                .fa-video {
-                    font-size: 36px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 36px;
-                }
-
-                .fa-user {
-                    font-size: 36px;
-                }
+                
             }
         }
 
@@ -5436,10 +5307,7 @@ a {
                 display: inline-block;
                 color: $gray;
 
-                font-size: 13px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
+                font-size: 12px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -5456,21 +5324,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 36px;
-                }
-
-                .fa-video {
-                    font-size: 36px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 36px;
-                }
-
-                .fa-user {
-                    font-size: 36px;
-                }
+                
             }
         }
 
@@ -5700,10 +5554,7 @@ a {
                 display: inline-block;
                 color: $gray;
 
-                font-size: 13px;
-                font-family: 'museoSans500', sans-serif;
-                font-weight: 500;
-                // margin: 20px;
+                font-size: 12px;
                 margin-top: 10px;
                 margin-bottom: 0;
 
@@ -5720,21 +5571,7 @@ a {
                     color: $gray;
                 }
 
-                .fa-table {
-                    font-size: 36px;
-                }
-
-                .fa-video {
-                    font-size: 36px;
-                }
-
-                .fa-calendar-alt {
-                    font-size: 36px;
-                }
-
-                .fa-user {
-                    font-size: 36px;
-                }
+                
             }
         }
     }

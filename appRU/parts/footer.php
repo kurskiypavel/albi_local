@@ -26,7 +26,7 @@ echo '
                     <p>Программы</p>
                 </a>
             </li>
-            <li class="'.($thisPage == 'contact instructor' ? 'active' : '').'">
+            <li class="'.($thisPage == 'bookPrivateEvent' ? 'active' : '').'">
                 <a href="bookPrivateEvent.php?user='.$user.'&student='.$user.'&page='.$page.'">
                     <i class="far fa-clock"></i>
                     <p>Book private</p>

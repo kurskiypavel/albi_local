@@ -17,8 +17,8 @@ require_once '../parts/header.php';
 
 $obj = new userClass($conn);
 
-if (isset($_POST['update'])) {
-    echo 'update';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
 
     $first_name = htmlspecialchars($_POST['first_name']);
     $last_name = htmlspecialchars($_POST['last_name']);
@@ -29,7 +29,7 @@ if (isset($_POST['update'])) {
     $about = htmlspecialchars($_POST['about']);
 
 
-    //update video
+    //update user account
     $obj->update($user, $first_name, $last_name, $birthdate, $location, $email, $phone, $about);
     echo "<script>location.href = 'user.php?user=" . $user . "';</script>";
 }
@@ -37,7 +37,7 @@ if (isset($_POST['update'])) {
 
 $query = "SELECT * FROM users WHERE id='$user'";
 $result = $conn->query($query);
-if (!$result) die($conn->connect_error);
+
 $rows = $result->num_rows;
 $obj = $result->fetch_object();
 ?>
@@ -148,8 +148,11 @@ $obj = $result->fetch_object();
             </li>
 
         </ul>
-        <input name="update" type="submit" value="Done">
-        <a href="user.php?user=<?php echo $user; ?>">Отменить</a>
+        <div style='display:none;' class="changesNav">
+            <!-- <input name="update" type="submit" value="Done"> -->
+            <a id='done'>Принять</a>
+            <a id='cancel' href="user.php?user=<?php echo $user; ?>">Отменить</a>
+        </div>
     </form>
     <?php include_once '../parts/footer.php' ?>
 </div>
@@ -159,7 +162,37 @@ $obj = $result->fetch_object();
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
               crossorigin="anonymous"></script>
               <script src='//s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js'></script>
-<script src="assets/js/phoneMask.js"></script>
+<script src="../../assets/js/phoneMask.js"></script>
+
+<script>
+
+//Show Save x Cancel buttons on Page:adminUser.php Field:form
+// event on typing
+$('.settingsPage form').keypress(function () {
+    
+    // hide back arrow
+    $('.fa-arrow-left').css('opacity','0');
+    //show upload button
+    $('.changesNav').css('display','block');
+});
+// event on changing
+$('.settingsPage form').change(function () {
+    // hide back arrow
+    $('.fa-arrow-left').css('opacity','0');
+    //show upload button
+    $('.changesNav').css('display','block');
+});
+
+//Refresh form and rollback all changes on Page:users.php Field:personal information
+// if Cancel button pressed on Avatar form - reload page
+$('#cancel').click(function () {
+    location.reload();
+});
+
+$('#done').click(function () {
+    $('form').submit();
+});
+</script>
 
 </body>
 

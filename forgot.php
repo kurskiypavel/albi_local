@@ -11,15 +11,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if phone is empty
     if (empty(trim($_POST["phone"]))) {
-        $phone_err = 'Please enter phone.';
+        $phone_err = 'Please enter phone';
     } else {
         $phone = trim($_POST["phone"]);
-        var_dump($phone);
+
     }
 
     // validate password
     if (empty(trim($_POST['password']))) {
-        $password_err = "Please enter a password.";
+        $password_err = "Please enter a password";
     } elseif (strlen(trim($_POST['password'])) < 6) {
         $password_err = "Password must have at least 6 characters.";
     } else {
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // validate confirm password
     if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = 'Please confirm password.';
+        $confirm_password_err = 'Please confirm password';
     } else {
         $confirm_password = trim($_POST['confirm_password']);
         if ($password != $confirm_password) {
@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 } else {
                     // display an error message if phone doesn't exist
-                    $phone_err = 'No account found with that phone.';
+                    $phone_err = 'No account found with that phone';
                 }
             }
         }
@@ -155,10 +155,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="slide1">
             <p class='label'>Enter your mobile phone</p>
             <input id='yourphone2' type="tel" class='gray' name="phone" value="<?php echo $phone; ?>">
+            <span class="error phone"><?php echo $phone_err; ?></span>
 
             <button class='buttonNext'>Next <i class="fas fa-angle-right"></i></button>
-
-            <span class="error"><?php echo $phone_err; ?></span>
         </div>
 
         <div style='display:none;' class="slide2">
@@ -197,8 +196,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $('.buttonNext').click(function (e) {
         e.preventDefault();
-        var err = '<?php echo $phone_err; ?>';
-        if (!err) {
+
+        var phone=$('#yourphone2').val();
+
+        if(phone == ""){
+            $('.error.phone').text('Please enter phone');
+        } else {
             $('.slide1').css('display', 'none');
             $('.slide2').css('display', 'block');
         }

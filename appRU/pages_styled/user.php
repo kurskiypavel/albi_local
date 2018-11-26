@@ -17,7 +17,7 @@ $classProgram = new programClass($conn);
 //select userd data
 $query = "SELECT * FROM users WHERE id='$user'";
 $result = $conn->query($query);
-if (!$result) die($conn->connect_error);
+//if (!$result) die($conn->connect_error);
 $rows = $result->num_rows;
 $obj = $result->fetch_object();
 
@@ -178,8 +178,14 @@ $obj = $result->fetch_object();
             ?>
 
         </div>
-    <div><a href="../ajax/logout.php">Log out</a></div>
+    <div class="logout"><a href="../ajax/logout.php">Log out</a></div>
 
+    </div>
+
+    <div style='display:none;' class="changesNav">
+        <!-- <input name="update" type="submit" value="Done"> -->
+        <a id='done'>Принять</a>
+        <a id='cancel' href="user.php?user=<?php echo $user; ?>">Отменить</a>
     </div>
 </div>
 
@@ -216,6 +222,44 @@ $obj = $result->fetch_object();
         //output the result on page
         $('#joinDate').text(momentjoinDate);
     
+</script>
+
+<script>
+
+    //Show Save x Cancel buttons on Page:adminUser.php Field:form
+    // event on typing
+    $('textarea').keypress(function () {
+        //show upload button
+        $('.changesNav').css('display','block');
+    });
+    // event on changing
+    $('textarea').change(function () {
+        //show upload button
+        $('.changesNav').css('display','block');
+    });
+
+    //Refresh form and rollback all changes on Page:users.php Field:personal information
+    // if Cancel button pressed on Avatar form - reload page
+    $('#cancel').click(function () {
+        location.reload();
+    });
+
+    $('#done').click(function () {
+            var user='<?php echo $user; ?>';
+            var about = $('textarea').val();
+            if (about != ""){
+                $.ajax({
+                    type: "POST",
+                    url: "../ajax/aboutUser.php",
+                    data: {
+                        id: user,
+                        about: about
+                    }
+                });
+            }
+
+        $('.changesNav').css('display','none');
+    });
 </script>
 </body>
 

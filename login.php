@@ -7,18 +7,19 @@ $phone = $password = "";
 $phone_err = $password_err = "";
 
 // Processing form data when form is submitted
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if phone is empty
     if (empty(trim($_POST["phone"]))) {
-        $phone_err = 'Please enter phone.';
+        $phone_err = 'Please enter phone';
     } else {
         $phone = trim($_POST["phone"]);
     }
 
     // Check if password is empty
     if (empty(trim($_POST['password']))) {
-        $password_err = 'Please enter your password.';
+        $password_err = 'Please enter your password';
     } else {
         $password = trim($_POST['password']);
     }
@@ -54,12 +55,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             header("location: appRU/pages_styled/events.php?user=" . $user_id);
                         } else {
                             // display an error message if password is not valid
-                            $password_err = 'The password you entered was not valid.';
+                            $password_err = 'The password you entered was not valid';
                         }
                     }
                 } else {
                     // display an error message if phone doesn't exist
-                    $phone_err = 'No account found with that phone.';
+                    $phone_err = 'No account found with that phone';
                 }
             }
         }
@@ -101,22 +102,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <p class='label'>Enter your mobile phone</p>
             <input id='yourphone2' type="tel" class='gray' name="phone" value="<?php echo $phone; ?>">
-            
-            <button class='buttonNext'>Next <i class="fas fa-angle-right"></i></button>
-            <span class="error"><?php echo $phone_err; ?></span>
+            <span class="error phone"><?php echo $phone_err; ?></span>
+            <button type="button" class='buttonNext'>Next <i class="fas fa-angle-right"></i></button>
+
         </div>
         <div style='display:none;' class="slide2">
 
             <p class='label'>Enter password</p>
             <input class='password' type="password" name="password">
-            
+            <span class="error">
+                            <?php echo $password_err; ?>
+                        </span>
 
 
             <input class='buttonLogin' type="submit" value="Login">
             <button class='buttonForgot' href="forgot.php">Forgot your password?</button>
-            <span class="error">
-                            <?php echo $password_err; ?>
-                        </span>
+
         </div>
     </form>
 
@@ -145,13 +146,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $('.buttonNext').click(function (e) {
         e.preventDefault();
-        var err = '<?php echo $phone_err; ?>';
-        if (!err) {
+        var phone=$('#yourphone2').val();
+
+        if(phone == ""){
+            $('.error.phone').text('Please enter phone');
+        } else {
             $('.slide1').css('display', 'none');
             $('.slide2').css('display', 'block');
         }
 
-    })
+
+
+
+
+
+    });
+
+
 
 </script>
 

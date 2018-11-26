@@ -3,14 +3,14 @@
 require_once 'appRU/config.php';
 // define variables and initialize with empty values
 $phone = $first_name = $password = $confirm_password = "";
-$phone_err = $password_err = $confirm_password_err = "";
+$phone_err = $password_err = $confirm_password_err = $param_password = "";
 
 // processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // validate phone
     if (empty(trim($_POST["phone"]))) {
-        $phone_err = "Please enter a phone.";
+        $phone_err = "Please enter a phone";
     } else {
         // prepare a select statement
         $sql = "SELECT id FROM users WHERE phone = ?";
@@ -39,14 +39,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // validate password
     if (empty(trim($_POST['first_name']))) {
-        $name_err = "Please enter name.";
+        $name_err = "Please enter name";
     } else {
         $first_name = htmlspecialchars(trim($_POST["first_name"]));
     }
 
     // validate password
     if (empty(trim($_POST['password']))) {
-        $password_err = "Please enter a password.";
+        $password_err = "Please enter a password";
     } elseif (strlen(trim($_POST['password'])) < 6) {
         $password_err = "Password must have at least 6 characters.";
     } else {
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // validate confirm password
     if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = 'Please confirm password.';
+        $confirm_password_err = 'Please confirm password';
     } else {
         $confirm_password = trim($_POST['confirm_password']);
         if ($password != $confirm_password) {
@@ -65,6 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // check input errors before inserting in database
     if (empty($phone_err) && empty($password_err) && empty($confirm_password_err)) {
+
+
         // prepare an insert statement
         $sql = "INSERT INTO users (first_name,phone, password) VALUES (?, ?, ?)";
 
@@ -112,9 +114,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user_id'] = $user_id;
                 }
                 // redirect to home page
-                header("location: appRU/pages_styled/programs.php?user=" . $user_id);
+//                header("location: appRU/pages_styled/programs.php?user=" . $user_id);
+                echo "<script>location.href = 'appRU/pages_styled/programs.php?user=" . $user_id . "';</script>";
             }
         }
+
         // close statement
         $stmt->close();
     }
@@ -153,11 +157,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="slide1">
             <p class='label'>Enter your mobile phone</p>
             <input id='yourphone2' type="tel" class='gray' name="phone" value="<?php echo $phone; ?>">
-            <span class="error"><?php echo $phone_err; ?></span>
+            <span class="error phone"><?php echo $phone_err; ?></span>
 
             <p class='label'>Enter your name</p>
-            <input class='gray' type="text" name="first_name" value="<?php echo $first_name; ?>">
-            <span class="error"><?php echo $name_err; ?></span>
+            <input class='gray first_name' type="text" name="first_name" value="<?php echo $first_name; ?>">
+            <span class="error name"><?php echo $name_err; ?></span>
 
             <button class='buttonNext'>Next <i class="fas fa-angle-right"></i></button>
         </div>
@@ -191,20 +195,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <script>
     $('.buttonLogin').click(function () {
         location.href = 'login.php';
-    })
+    });
 
     $('.buttonNext').click(function (e) {
         e.preventDefault();
-        var err = '<?php echo $name_err . $phone_err; ?>';
-        if (!err) {
+
+        var name = $('.first_name').val();
+        var phone = $('#yourphone2').val();
+
+        if (name == "" && phone == "") {
+            $('.error.name').text('Please enter name');
+            $('.error.phone').text('Please enter phone');
+        } else if (name == "") {
+            $('.error.name').text('Please enter name');
+        } else if (phone == "") {
+            $('.error.phone').text('Please enter phone');
+        } else {
             $('.slide1').css('display', 'none');
             $('.slide2').css('display', 'block');
         }
 
+
     })
 
 </script>
-
 
 </body>
 </html>
