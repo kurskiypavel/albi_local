@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <div class="forgotPage">
     <div class="header">
-        <a id='backHome' href='http://albi-local:8888/newIndex.html'><i class="fas fa-arrow-left"></i></a>
+        <a id='backHome' href='http://178.128.238.166/newIndex.html'><i class="fas fa-arrow-left"></i></a>
         <h3>Recover password</h3>
     </div>
 

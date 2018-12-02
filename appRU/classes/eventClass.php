@@ -18,12 +18,12 @@ class eventClass
 
     public function createGroupEvent($group_event_id, $program,
                                      $student, $instructor,
-                                     $date, $time, $comment,
+                                      $comment,
                                      $confirmed, $canceled)
     {
         $sql_new_group_event = "INSERT INTO events VALUES" . "(null,'$group_event_id',
                                                         '$program','$student','$instructor',
-                                                        '$date','$time','$comment','0',
+                                                        '$comment','0',
                                                         '$confirmed','$canceled',null)";
         $this->conn->query($sql_new_group_event);
 
@@ -40,11 +40,10 @@ class eventClass
         $this->conn->query($sql_new_event);
     }
 
-    public function updateGroup($date, $time, $id, $group_event_id, $comment)
+    public function updateGroup( $id, $group_event_id, $comment)
     {
         $sql_update_event = "UPDATE events SET group_event_id='$group_event_id',
-                          date='$date',
-                         time='$time',
+                          
                          comment='$comment'
                          WHERE id='$id'";
         $this->conn->query($sql_update_event);

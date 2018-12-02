@@ -30,13 +30,12 @@ if ($_POST) {
     if (isset($_POST['changeGroupEvent'])) {
 
 
-        $date = htmlspecialchars($_POST['date']);
-        $time = htmlspecialchars($_POST['time']);
+
         $comment = htmlspecialchars($_POST['comment']);
-        $group_event_id = $objEvent->program . 'and' . $date . 'and' . $time;
+        $group_event_id = $objEvent->program;
 
         //changeGroupEvent
-        $obj->updateGroup($date, $time, $id, $group_event_id, $comment);
+        $obj->updateGroup( $id, $group_event_id, $comment);
         if($page=='programs') {
             echo "<script>location.href = 'programs.php?user=".$user."';</script>";
         } elseif ($page=='program') {
@@ -61,6 +60,15 @@ if ($_POST) {
     }
 
 }
+
+//Get available schedule for this program
+$query = "SELECT schedule FROM programs WHERE id='$objEvent->program'";
+$result = $conn->query($query);
+$rows = $result->num_rows;
+$obj = $result->fetch_all();
+
+//$schedule= '<p class="gray">По ' . $obj[0][0]. '</p>';
+$schedule= $obj[0][0];
 
 
 
@@ -133,8 +141,7 @@ if ($_POST) {
 
 
         <form class='form' method="post">
-            <p class="label">Дата</p><input class="gray"  name='date' type="date" placeholder="date" value="<?php echo $objEvent->date; ?>">
-            <p class="label">Время</p><input class="gray"  name='time' type="time" placeholder="time" value="<?php echo $objEvent->time; ?>">
+            <p class="schedule">Занятия проходят по <?php echo $schedule;?></p>
             <p class="label">Комментарий</p><textarea class=""  name='comment' type="text" value="<?php echo $objEvent->comment; ?>"><?php echo $objEvent->comment; ?></textarea>
 
             <input class="button" name="changeGroupEvent" type="submit" value="Изменить">

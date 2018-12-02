@@ -111,10 +111,7 @@ $obj = $result->fetch_object();
         <div class="info">
             <h3>Личная информация</h3>
             <ul>
-                <li>
-                    <p><span class="bold">Пол: </span><?php echo $obj->gender; ?></p>
-                    <p class="hide" style="display: none;"><span class="bold">Gender: </span>—</p>
-                </li>
+
                 <li>
                     <!--                        <p><span class="bold">Birthdate: </span>2011-11-11</p>-->
                     <p><span class="bold">Дата рождения: </span><span id="bdateRU"></span></p>
@@ -178,7 +175,7 @@ $obj = $result->fetch_object();
             ?>
 
         </div>
-    <div class="logout"><a href="../ajax/logout.php">Log out</a></div>
+    <div style="margin-top: 30px;" class="logout"><a href="../ajax/logout.php">Выйти</a></div>
 
     </div>
 
